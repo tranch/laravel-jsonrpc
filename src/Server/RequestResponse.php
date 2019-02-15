@@ -10,7 +10,7 @@ use Upgate\LaravelJsonRpc\Exception\JsonRpcException;
 final class RequestResponse implements Jsonable, Arrayable
 {
 
-    private $id;
+    private $id = false;
     private $result;
     private $isError = false;
 
@@ -84,7 +84,7 @@ final class RequestResponse implements Jsonable, Arrayable
     public function toArray()
     {
         $result = ['jsonrpc' => '2.0'];
-        if ($this->id) {
+        if (!is_null($this->id)) {
             $result['id'] = $this->id;
         }
         if ($this->isError) {
